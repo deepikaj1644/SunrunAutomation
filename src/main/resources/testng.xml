@@ -10,7 +10,7 @@
         <classes>
           <!--   <class name="com.crm.qa.testcases.LoginToApplicationTest"></class>-->
             <!--     <class name="com.crm.qa.testcases.CreateNewLeadTest"></class>-->
-            <!--  <class name="com.crm.qa.testcases.CompleteProjectTask"></class>-->
+            <class name="com.crm.qa.testcases.CompleteProjectTask"></class>
             <class name="com.crm.qa.testcases.AccountTest"></class>
 
          </classes>
