@@ -26,9 +26,11 @@ public class TaskPage extends TestBase {
 
 
 
-    public String CompleteAnyTask()
-    {
-        TestUtil.ClickOn(driver,TaskCompleteButton,20);
+    public String CompleteAnyTask() throws InterruptedException {
+        //TestUtil.ClickOn(driver,TaskCompleteButton,20);
+        TestUtil.Sleep(TestUtil.MEDIUM_WAIT_TIME);
+        TestUtil.WaitForElementToBeClickable(driver,TaskCompleteButton,30);
+        TaskCompleteButton.click();
         TestUtil.WaitForElementToBeVisible(driver,Status,60);
         String TaskStatus = Status.getText();
         return TaskStatus;

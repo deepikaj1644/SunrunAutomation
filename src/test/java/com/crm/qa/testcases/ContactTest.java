@@ -52,4 +52,5 @@ public class ContactTest extends TestBase {
         driver.quit();
     }
 
+
 }

@@ -17,6 +17,7 @@ import com.crm.qa.base.TestBase;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class TestUtil extends TestBase {
     public static long PAGE_LOAD_TIMEOUT = 60;
@@ -36,9 +37,9 @@ public class TestUtil extends TestBase {
 
 
 
-    public void SwitchToFrame()
+    public static void SwitchToFrame(String Name)
     {
-        driver.switchTo().frame("mainpannel");
+        driver.switchTo().frame(Name);
     }
 
 
@@ -51,6 +52,7 @@ public class TestUtil extends TestBase {
         }
         try {
 
+            assert file != null;
             book = WorkbookFactory.create(file);
 
         } catch (InvalidFormatException e) {
@@ -99,7 +101,12 @@ public class TestUtil extends TestBase {
         driver.switchTo().window(oldTab);
     }
 
-    public static void SwitchToNewWindow(int TabIndex) {
+    public static void SwitchToNewWindow() {
+        String NewWindow = driver.getWindowHandle();
+        driver.switchTo().window(NewWindow);
+    }
+
+    public static void SwitchToNewTab(int TabIndex) {
         ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
         System.out.println(newTab.size());
         driver.switchTo().window(newTab.get(TabIndex));
@@ -136,17 +143,18 @@ public class TestUtil extends TestBase {
 
     }
 
-    public static void changeColor(String color, WebElement element, WebDriver driver) {
+    public static void changeColor(String color, WebElement element, WebDriver driver) throws InterruptedException {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
         js.executeScript("arguments[0].style.backgroundColor = '" + color + "'", element);
 
         try {
             Thread.sleep(20);
         } catch (InterruptedException e) {
+            Thread.sleep(20);
         }
     }
 
-    public static void flash(WebElement element, WebDriver driver) {
+    public static void flash(WebElement element, WebDriver driver) throws InterruptedException {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
         String bgcolor = element.getCssValue("backgroundColor");
         for (int i = 0; i < 10; i++) {
@@ -158,6 +166,28 @@ public class TestUtil extends TestBase {
     public static void Sleep(int timeInSeconds) throws InterruptedException {
         timeInMilliSec = timeInSeconds*1000;
         Thread.sleep(timeInMilliSec);
+    }
+
+    public static void SelectRequiredObjectFromLookup(String Object, String RecordName) throws InterruptedException {
+
+            SwitchToMainWindow();
+
+            driver.findElement(By.xpath("//label[text()='" + Object + "']//following::span/a/img[contains(@title,'" + Object + " Lookup')]")).click();
+            Sleep(SMALL_WAIT_TIME);
+            SwitchToNewWindow();
+            SwitchToFrame("searchFrame");
+            driver.findElement(By.xpath("//input[@name='lksrch']")).sendKeys(RecordName);
+            driver.findElement(By.xpath("//input[@title='Go!']")).click();
+            Sleep(SMALL_WAIT_TIME);
+            SwitchToFrame("resultsFrame");
+            Sleep(XSMALL_WAIT_TIME);
+            driver.findElement(By.xpath("//a[text()='" + RecordName + "']")).click();
+            Sleep(XSMALL_WAIT_TIME);
+            SwitchToMainWindow();
+
+            WaitForElementToBeVisible(driver,driver.findElement(By.xpath("(//img[contains(@title,'" + Object + "')]//ancestor::span/input)[1]")),10);
+            Assert.assertTrue(driver.findElement(By.xpath("(//img[contains(@title,'" + Object + "')]//ancestor::span/input)[1]")).isDisplayed());
+
     }
 
 
