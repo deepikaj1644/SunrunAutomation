@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -44,7 +46,7 @@ public class TestUtil extends TestBase {
 
 
     public static Object[][] getTestData(String sheetName) {
-        FileInputStream file = null;
+        FileInputStream file = null;//frame[@name='resultsFrame']
         try {
             file = new FileInputStream(TESTDATA_SHEET_PATH);
         } catch (FileNotFoundException e) {
@@ -170,20 +172,30 @@ public class TestUtil extends TestBase {
 
     public static void SelectRequiredObjectFromLookup(String Object, String RecordName) throws InterruptedException {
 
-            SwitchToMainWindow();
-
+            //SwitchToMainWindow();
             driver.findElement(By.xpath("//label[text()='" + Object + "']//following::span/a/img[contains(@title,'" + Object + " Lookup')]")).click();
             Sleep(SMALL_WAIT_TIME);
-            SwitchToNewWindow();
+            Set<String> S1 = driver.getWindowHandles();
+            Iterator it = S1.iterator();
+            String parentwindow =(String) it.next();
+            String childWindow =(String) it.next();
+
+           // driver.findElement(By.xpath("//label[text()='" + Object + "']//following::span/a/img[contains(@title,'" + Object + " Lookup')]")).click();
+
+            driver.switchTo().window(childWindow);
             SwitchToFrame("searchFrame");
             driver.findElement(By.xpath("//input[@name='lksrch']")).sendKeys(RecordName);
             driver.findElement(By.xpath("//input[@title='Go!']")).click();
             Sleep(SMALL_WAIT_TIME);
+            driver.switchTo().defaultContent();
+            Sleep(XSMALL_WAIT_TIME);
             SwitchToFrame("resultsFrame");
             Sleep(XSMALL_WAIT_TIME);
             driver.findElement(By.xpath("//a[text()='" + RecordName + "']")).click();
             Sleep(XSMALL_WAIT_TIME);
-            SwitchToMainWindow();
+
+            driver.switchTo().window(parentwindow);
+            driver.switchTo().defaultContent();
 
             WaitForElementToBeVisible(driver,driver.findElement(By.xpath("(//img[contains(@title,'" + Object + "')]//ancestor::span/input)[1]")),10);
             Assert.assertTrue(driver.findElement(By.xpath("(//img[contains(@title,'" + Object + "')]//ancestor::span/input)[1]")).isDisplayed());

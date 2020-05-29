@@ -47,7 +47,7 @@ public class AccountTest extends TestBase {
 
     }
 
-    @Test(priority = 2,enabled=false)
+    @Test(priority = 2)
     public void VerifyEditAddressInformationTest() throws InterruptedException {
 
         homepage.PerformGlobalSearch("AutoTestAcc1");
