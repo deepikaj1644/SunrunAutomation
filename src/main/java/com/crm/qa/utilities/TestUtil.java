@@ -170,10 +170,10 @@ public class TestUtil extends TestBase {
         Thread.sleep(timeInMilliSec);
     }
 
-    public static void SelectRequiredObjectFromLookup(String Object, String RecordName) throws InterruptedException {
+    public static void SelectRequiredObjectFromLookup(String ObjectLabel, String RecordName) throws InterruptedException {
 
             //SwitchToMainWindow();
-            driver.findElement(By.xpath("//label[text()='" + Object + "']//following::span/a/img[contains(@title,'" + Object + " Lookup')]")).click();
+            driver.findElement(By.xpath("//label[text()='" + ObjectLabel + "']//following::span/a/img[contains(@title,'" + ObjectLabel + " Lookup')]")).click();
             Sleep(SMALL_WAIT_TIME);
             Set<String> S1 = driver.getWindowHandles();
             Iterator it = S1.iterator();
@@ -197,8 +197,8 @@ public class TestUtil extends TestBase {
             driver.switchTo().window(parentwindow);
             driver.switchTo().defaultContent();
 
-            WaitForElementToBeVisible(driver,driver.findElement(By.xpath("(//img[contains(@title,'" + Object + "')]//ancestor::span/input)[1]")),10);
-            Assert.assertTrue(driver.findElement(By.xpath("(//img[contains(@title,'" + Object + "')]//ancestor::span/input)[1]")).isDisplayed());
+            WaitForElementToBeVisible(driver,driver.findElement(By.xpath("(//img[contains(@title,'" + ObjectLabel + "')]//ancestor::span/input)[1]")),10);
+            Assert.assertTrue(driver.findElement(By.xpath("(//img[contains(@title,'" + ObjectLabel + "')]//ancestor::span/input)[1]")).isDisplayed());
 
     }
 

@@ -67,6 +67,9 @@ public class AccountDetailsPage extends TestBase {
     @FindBy(xpath="//td[text()='Municipality']/following-sibling::td[1]")
     WebElement Municipality_Textbox;
 
+    @FindBy(xpath="//td[text()='Region']/following-sibling::td[1]")
+    WebElement Region_Textbox;
+
 
 
 
@@ -104,6 +107,9 @@ public class AccountDetailsPage extends TestBase {
     @FindBy(xpath="//td[text()='Municipality']/following-sibling::td/div/input")
     WebElement Municipality_Input;
 
+    @FindBy(xpath="//td[text()='Region']/following-sibling::td/div/span/select")
+    WebElement Region_Lst;
+
 
     @FindBy(xpath="//input[@type='button' and @name='inlineEditSave']")
     WebElement SaveBtn;
@@ -129,7 +135,7 @@ public class AccountDetailsPage extends TestBase {
         return EditBtn.isDisplayed();
     }
 
-    public void FillAddressInformation(String BStreet, String BCity, String BState, String BZip, String BCountry, String Country, String Phone, String TownshipName, String CountyName, String PrimaryTitle, String SecondaryTitle, String HomeTypeonTitle, String LegalDescription, String OwnershipType, String APN, String Municipality) throws InterruptedException {
+    public void FillAddressInformationResidentialAccount(String BStreet, String BCity, String BState, String BZip, String BCountry, String Country, String Phone, String TownshipName, String CountyName, String PrimaryTitle, String SecondaryTitle, String HomeTypeonTitle, String LegalDescription, String OwnershipType, String APN, String Municipality) throws InterruptedException {
         TestUtil.WaitForElementToBeVisible(driver,BillingAddress_Textbox,60);
         TestUtil.flash(BillingAddress_Textbox, driver);
         TestUtil.DoubleclickElementByJS(BillingAddress_Textbox,driver);
@@ -211,4 +217,107 @@ public class AccountDetailsPage extends TestBase {
 
     }
 
+    public void FillAddressInformationBranchAccount(String BStreet,String BCity, String BState, String BZip,String BCountry,String Country,String Region,String PrimaryTitle, String HomeTypeonTitle,String LegalDescription) throws InterruptedException {
+
+        TestUtil.WaitForElementToBeVisible(driver,BillingAddress_Textbox,60);
+        TestUtil.flash(BillingAddress_Textbox, driver);
+        TestUtil.DoubleclickElementByJS(BillingAddress_Textbox,driver);
+
+        TestUtil.WaitForElementToBeVisible(driver,BillingStreet_TextArea,50);
+        BillingStreet_TextArea.sendKeys(BStreet);
+        BillingCity_Textbox.sendKeys(BCity);
+        BillingState_Textbox.sendKeys(BState);
+        BillingZipCode_Textbox.sendKeys(BZip);
+        BillingCountry_Textbox.sendKeys(BCountry);
+        OK_Button.click();
+
+        TestUtil.WaitForElementToBeVisible(driver,Country_Textbox,50);
+        TestUtil.drawBorder(Country_Textbox,driver);
+        TestUtil.DoubleclickElementByJS(Country_Textbox,driver);
+        Country_Input.sendKeys(Country);
+        TestUtil.Sleep(TestUtil.XSMALL_WAIT_TIME);
+
+        TestUtil.WaitForElementToBeVisible(driver,Region_Textbox,50);
+        TestUtil.drawBorder(Region_Textbox,driver);
+        TestUtil.DoubleclickElementByJS(Region_Textbox,driver);
+        Select RegionLst = new Select(Region_Lst);
+        RegionLst.selectByVisibleText(Region);
+        TestUtil.Sleep(TestUtil.XSMALL_WAIT_TIME);
+
+        SaveBtn.click();
+        TestUtil.WaitForElementToBeClickable(driver,EditBtn, TestUtil.MEDIUM_WAIT_TIME);
+        TestUtil.Sleep(TestUtil.SMALL_WAIT_TIME);
+
+        TestUtil.drawBorder(PrimaryTitle_Textbox, driver);
+        TestUtil.DoubleclickElementByJS(PrimaryTitle_Textbox,driver);
+        PrimaryTitle_Input.sendKeys(PrimaryTitle);
+        TestUtil.Sleep(TestUtil.XSMALL_WAIT_TIME);
+
+        TestUtil.drawBorder(HomeTypeonTitle_Textbox, driver);
+        TestUtil.DoubleclickElementByJS(HomeTypeonTitle_Textbox,driver);
+        Select HomeType = new Select(HomeTypeonTitle_Lst);
+        HomeType.selectByVisibleText(HomeTypeonTitle);
+        TestUtil.Sleep(TestUtil.XSMALL_WAIT_TIME);
+
+        TestUtil.drawBorder(LegalDescription_Textbox, driver);
+        TestUtil.DoubleclickElementByJS(LegalDescription_Textbox,driver);
+        LegalDescription_Input.sendKeys(LegalDescription);
+        TestUtil.Sleep(TestUtil.XSMALL_WAIT_TIME);
+
+        SaveBtn.click();
+        TestUtil.WaitForElementToBeClickable(driver,EditBtn, TestUtil.MEDIUM_WAIT_TIME);
+
+
+    }
+
+
+    public void FillAddressInformationCompanyAccount(String BStreet,String BCity, String BState, String BZip,String BCountry,String PrimaryTitle,String SecondaryTitle, String HomeTypeonTitle,String LegalDescription,String APN) throws InterruptedException {
+
+        TestUtil.WaitForElementToBeVisible(driver,BillingAddress_Textbox,60);
+        TestUtil.flash(BillingAddress_Textbox, driver);
+        TestUtil.DoubleclickElementByJS(BillingAddress_Textbox,driver);
+
+        TestUtil.WaitForElementToBeVisible(driver,BillingStreet_TextArea,50);
+        BillingStreet_TextArea.sendKeys(BStreet);
+        BillingCity_Textbox.sendKeys(BCity);
+        BillingState_Textbox.sendKeys(BState);
+        BillingZipCode_Textbox.sendKeys(BZip);
+        BillingCountry_Textbox.sendKeys(BCountry);
+        OK_Button.click();
+
+        SaveBtn.click();
+        TestUtil.WaitForElementToBeClickable(driver,EditBtn, TestUtil.MEDIUM_WAIT_TIME);
+        TestUtil.Sleep(TestUtil.SMALL_WAIT_TIME);
+
+        TestUtil.drawBorder(PrimaryTitle_Textbox, driver);
+        TestUtil.DoubleclickElementByJS(PrimaryTitle_Textbox,driver);
+        PrimaryTitle_Input.sendKeys(PrimaryTitle);
+        TestUtil.Sleep(TestUtil.XSMALL_WAIT_TIME);
+
+        TestUtil.drawBorder(SecondaryTitle_Textbox, driver);
+        TestUtil.DoubleclickElementByJS(SecondaryTitle_Textbox,driver);
+        SecondaryTitle_Input.sendKeys(SecondaryTitle);
+        TestUtil.Sleep(TestUtil.XSMALL_WAIT_TIME);
+
+        TestUtil.drawBorder(HomeTypeonTitle_Textbox, driver);
+        TestUtil.DoubleclickElementByJS(HomeTypeonTitle_Textbox,driver);
+        Select HomeType = new Select(HomeTypeonTitle_Lst);
+        HomeType.selectByVisibleText(HomeTypeonTitle);
+        TestUtil.Sleep(TestUtil.XSMALL_WAIT_TIME);
+
+        TestUtil.drawBorder(LegalDescription_Textbox, driver);
+        TestUtil.DoubleclickElementByJS(LegalDescription_Textbox,driver);
+        LegalDescription_Input.sendKeys(LegalDescription);
+        TestUtil.Sleep(TestUtil.XSMALL_WAIT_TIME);
+
+        TestUtil.drawBorder(APN_Textbox, driver);
+        TestUtil.DoubleclickElementByJS(APN_Textbox,driver);
+        APN_Input.sendKeys(APN);
+        TestUtil.Sleep(TestUtil.XSMALL_WAIT_TIME);
+
+        SaveBtn.click();
+        TestUtil.WaitForElementToBeClickable(driver,EditBtn, TestUtil.MEDIUM_WAIT_TIME);
+
+
+    }
 }
