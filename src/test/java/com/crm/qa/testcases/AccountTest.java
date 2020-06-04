@@ -99,6 +99,28 @@ public class AccountTest extends TestBase {
 
     }
 
+    @Test(priority = 1, description="Creates a new Account of type 'Branch'")
+    public void VerifyCreateNewPartnerAccountTest() throws InterruptedException {
+
+        objHomePage = homepage.ClickAnyTabOnHomePage("Accounts");
+        Assert.assertTrue(homepage.ValidateTabLabelDisplayed("Accounts"),"Label Does not exist");
+
+        RecTypePage = objHomePage.ClickOnNewButton();
+        RecTypePage.SelectRecordType("Partner");
+
+        accEditpage = new AccountEditPage();
+
+        accDetailspage = accEditpage.CreateNewPartnerAccount("Auto_LGCY Power, LLC","Auto_4358935161","Direct","9/8/2014","Sunrun eSignAdmin","sunrun_esign_admin@sunrunhome.com.installops","Sales","00G60000002hcQb","Active","SR-Branded, Ineligible","salessupport@lgcypower.com.installops","Auto High","00G32000003FWMG","00G32000003FWMp","LGCYPowerLogo_Stretched Blue.png","LGCY Power, LLC","Sunrun","02d320000004Cm2AAE","Matrix","lgcyops@sunrun.com.installops","Headquarters","Sandy - UT","A+","Costco Fenceline","3450 N triumph blvd\n" +
+                "Suite 102","Lehi","UT","84043","(844) 542-9797 opt 2","Lgcypower.com","Confirmed","Standardization Missing Address");
+        Assert.assertTrue(accDetailspage.ValidateVisibilityofEditButton());
+
+        homepage.PerformGlobalSearch("Auto_LGCY Power, LLC");
+        accDetailspage = new AccountDetailsPage();
+        Assert.assertTrue(accDetailspage.ValidateAccountDetailLabel());
+
+    }
+
+
 
 
     @AfterClass

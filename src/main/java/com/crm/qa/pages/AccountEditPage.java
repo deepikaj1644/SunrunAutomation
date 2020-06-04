@@ -94,7 +94,7 @@ public class AccountEditPage extends TestBase {
     @FindBy(xpath="(//label[text()='Partner Logo']/following::td/input)[1]")
     WebElement PartnerLogo_Textbox;
 
-    @FindBy(xpath="(//label[text()='Pricing Scheme']/following::td/input)[1]")
+    @FindBy(xpath="(//label[text()='Pricing Scheme']/following::td/textarea)[1]")
     WebElement PricingScheme_Textbox;
 
     @FindBy(xpath="(//label[text()='DocuSign Host Name']/following::td/input)[1]")
@@ -107,7 +107,7 @@ public class AccountEditPage extends TestBase {
     WebElement BusinessDiv_Textbox;
 
     @FindBy(xpath="(//label[text()='Enabled To Sell BrightBox']/following::td/input)[1]")
-    WebElement EnabledToSell_Textbox;
+    WebElement EnabledToSell_Checkbox;
 
     @FindBy(xpath="(//label[text()='System Size Exponent']/following::td/input)[1]")
     WebElement SysSizeExponent_Textbox;
@@ -145,6 +145,70 @@ public class AccountEditPage extends TestBase {
     WebElement APN_Textbox;
     @FindBy(xpath="(//label[text()='Home Type on Title']/following::td/span/select)[1]")
     WebElement HomeType_Lst;
+
+    //Account Type Partner Objects
+    @FindBy(xpath="(//label[text()='Classification']/following::td/span/select)[1]")
+    WebElement Classification_Lst;
+
+    @FindBy(xpath="(//label[text()='Partner Status']/following::td/span/select)[1]")
+    WebElement PartnerStatus_Lst;
+
+    @FindBy(xpath="//select[@title='Partner Type - Available']")
+    WebElement PartnerType_Lst;
+
+    @FindBy(xpath="//label[text()='Partner Type']//following::img[contains(@id,'right_arrow')]")
+    WebElement RightArrow_Img;
+
+    @FindBy(xpath="(//label[text()='Partner Tier']/following::td/span/select)[1]")
+    WebElement PartnerTier_Lst;
+
+    @FindBy(xpath="(//label[text()='Corporate Email Address']/following::td/input)[1]")
+    WebElement CorporateEmail_Textbox;
+
+    @FindBy(xpath="(//label[text()='Quick Design Access']/following::td/span/select)[1]")
+    WebElement QuickDesignAccess_Lst;
+
+    @FindBy(xpath="(//label[text()='All Sales Users Group Id']/following::td/input)[1]")
+    WebElement AllSalesUsersGroupId_Textbox;
+
+    @FindBy(xpath="(//label[text()='All Users Group Id']/following::td/input)[1]")
+    WebElement AllUsersGroupId_Textbox;
+
+    @FindBy(xpath="(//label[text()='Partner DBA Name']/following::td/input)[1]")
+    WebElement PartnerDBAName_Textbox;
+
+    @FindBy(xpath="(//label[text()='Account Division']/following::select)[1]")
+    WebElement AccountDivision_Lst;
+
+    @FindBy(xpath="(//label[text()='Operations Admin']/following::td/input)[1]")
+    WebElement OperationsAdmin_Textbox;
+
+    @FindBy(xpath="(//label[text()='Grade']/following::td/span/select)[1]")
+    WebElement Grade_Lst;
+
+    @FindBy(xpath="(//label[text()='Schedule Type']/following::td/span/select)[1]")
+    WebElement ScheduleType_Lst;
+
+    @FindBy(xpath="(//label[text()='Shipping Street']/following::td/textarea)[1]")
+    WebElement ShippingStreet_Textarea;
+
+    @FindBy(xpath="(//label[text()='Shipping City']/following::td/input)[1]")
+    WebElement ShippingCity_Textbox;
+
+    @FindBy(xpath="(//label[text()='Shipping State/Province']/following::td/input)[1]")
+    WebElement ShippingState_Textbox;
+
+    @FindBy(xpath="(//label[text()='Shipping Zip/Postal Code']/following::td/input)[1]")
+    WebElement ShippingZip_Textbox;
+
+    @FindBy(xpath="(//label[text()='Website']/following::div/input)[1]")
+    WebElement Website_Textbox;
+
+    @FindBy(xpath="(//label[text()='Stage']/following::td/span/select)[1]")
+    WebElement Stage_Lst;
+
+    @FindBy(xpath="(//label[text()='Active?']/following::td/input)[1]")
+    WebElement Active_Checkbox;
 
 
     @FindBy(xpath="//input[@type='submit' and @name='save']")
@@ -249,7 +313,7 @@ public class AccountEditPage extends TestBase {
         Select QuickDesignLst = new Select(QuickDesign_Lst);
         QuickDesignLst.selectByVisibleText(QuickDesign);
         BusinessDiv_Textbox.sendKeys(BusinessDiv);
-        EnabledToSell_Textbox.click();
+        EnabledToSell_Checkbox.click();
         Incorporated_Textbox.sendKeys(Incorporated);
 
         SysSizeExponent_Textbox.sendKeys(SysSizeExponent);
@@ -295,6 +359,79 @@ public class AccountEditPage extends TestBase {
         CongressDistrictNumber_Textbox.sendKeys(CongressDistrictNumber);
         StateLegislativeUpper_Textbox.sendKeys(StateLegislativeUpper);
         StateLegislativeLower_Textbox.sendKeys(StateLegislativeLower);
+
+        TestUtil.ClickOn(driver,SaveBtn,20);
+
+        return new AccountDetailsPage();
+
+    }
+
+    public AccountDetailsPage CreateNewPartnerAccount(String AccName,String AccountNumber,String Classification,String EDPDate,String DocuSignHostName,String DocuSignEmail,String PartnerType,String GroupID,String PartnerStatus,String PartnerTier,String CorporateEmail,String QuickDesign,String AllSalesUsersGroupId,String AllUsersGroupId,String PartnerLogo,String PartnerDBAName,String AccountDivision,String BusinessDiv,String PricingScheme,String OperationsAdmin,String OfficeLocation,String FieldMarketingTeam,String Grade,String ScheduleType,String ShippingStreet,String ShippingCity,String ShippingState,String ShippingZip,String Phone,String Website,String Stage,String AddressStandardizationStatus) throws InterruptedException {
+        TestUtil.WaitForElementToBeVisible(driver,AccountName_Textbox,30);
+        AccountName_Textbox.sendKeys(AccName);
+        AccountNumber_Textbox.sendKeys(AccountNumber);
+        TestUtil.Sleep(TestUtil.XSMALL_WAIT_TIME);
+
+        Select ClassificationLst = new Select(Classification_Lst);
+        ClassificationLst.selectByVisibleText(Classification);
+
+        EDPDate_Textbox.sendKeys(EDPDate);
+        DocuSignHostName_Textbox.sendKeys(DocuSignHostName);
+        DocuSignEmail_Textbox.sendKeys(DocuSignEmail);
+
+        Select PartnerTypeLst = new Select(PartnerType_Lst);
+        PartnerTypeLst.selectByVisibleText(PartnerType);
+        RightArrow_Img.click();
+        GroupID_Textbox.sendKeys(GroupID);
+
+        Select PartnerStatusLst = new Select(PartnerStatus_Lst);
+        PartnerStatusLst.selectByVisibleText(PartnerStatus);
+
+        Select PartnerTierLst = new Select(PartnerTier_Lst);
+        PartnerTierLst.selectByVisibleText(PartnerTier);
+
+        CorporateEmail_Textbox.sendKeys(CorporateEmail);
+
+        Select QuickDesignLst = new Select(QuickDesign_Lst);
+        QuickDesignLst.selectByVisibleText(QuickDesign);
+
+        AllSalesUsersGroupId_Textbox.sendKeys(AllSalesUsersGroupId);
+        AllUsersGroupId_Textbox.sendKeys(AllUsersGroupId);
+        EnabledToSell_Checkbox.click();
+        PartnerLogo_Textbox.sendKeys(PartnerLogo);
+        PartnerDBAName_Textbox.sendKeys(PartnerDBAName);
+
+        Select AccountDivisionLst = new Select(AccountDivision_Lst);
+        AccountDivisionLst.selectByVisibleText(AccountDivision);
+
+        BusinessDiv_Textbox.sendKeys(BusinessDiv);
+        PricingScheme_Textbox.sendKeys(PricingScheme);
+
+        OperationsAdmin_Textbox.sendKeys(OperationsAdmin);
+
+        Select OfficeLocationLst = new Select(OfficeLocation_Lst);
+        OfficeLocationLst.selectByVisibleText(OfficeLocation);
+
+        FieldMarketingTeam_Textbox.sendKeys(FieldMarketingTeam);
+
+        Select GradeLst = new Select(Grade_Lst);
+        GradeLst.selectByVisibleText(Grade);
+
+        Select ScheduleTypeLst = new Select(ScheduleType_Lst);
+        ScheduleTypeLst.selectByVisibleText(ScheduleType);
+
+        ShippingStreet_Textarea.sendKeys(ShippingStreet);
+        ShippingCity_Textbox.sendKeys(ShippingCity);
+        ShippingState_Textbox.sendKeys(ShippingState);
+        ShippingZip_Textbox.sendKeys(ShippingZip);
+        Phone_Textbox.sendKeys(Phone);
+        Website_Textbox.sendKeys(Website);
+
+        Select StageLst = new Select(Stage_Lst);
+        StageLst.selectByVisibleText(Stage);
+
+        Select AddressStandardizationStatusLst = new Select(AddressStandardizationStatus_Lst);
+        AddressStandardizationStatusLst.selectByVisibleText(AddressStandardizationStatus);
 
         TestUtil.ClickOn(driver,SaveBtn,20);
 
