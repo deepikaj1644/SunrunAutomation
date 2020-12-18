@@ -20,8 +20,7 @@ public class ServiceContractTest extends TestBase {
     }
 
     @BeforeMethod
-    public void Setup()
-    {
+    public void Setup() throws InterruptedException {
         initialization();
         loginpage = new LoginPage();
         homepage = loginpage.login(prop.getProperty("Username"), prop.getProperty("Password"));

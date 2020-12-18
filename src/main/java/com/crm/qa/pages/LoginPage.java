@@ -1,5 +1,6 @@
 package com.crm.qa.pages;
 
+import com.crm.qa.utilities.TestUtil;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -33,11 +34,14 @@ public class LoginPage extends TestBase {
         PageFactory.initElements(driver, this);
     }
 
-    public HomePage login(String un, String pw) {
+    public HomePage login(String un, String pw) throws InterruptedException {
 
-        Username.sendKeys(un);
-        Password.sendKeys(pw);
+        Username.sendKeys("deepika.joshi@sunrun.com.installops");
+        Password.sendKeys("Welcome@1234");
+        TestUtil.Sleep(TestUtil.XSMALL_WAIT_TIME);
         LogInToSandbox.click();
+
+
 
         return new HomePage();
     }

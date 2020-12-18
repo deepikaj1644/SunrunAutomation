@@ -16,6 +16,7 @@ public class AccountTest extends TestBase {
     SelectObjectRecordTypePage RecTypePage;
     AccountEditPage accEditpage;
     AccountDetailsPage accDetailspage;
+    String sheetName = "Residential_Account";
 
 
     public AccountTest()
@@ -23,9 +24,13 @@ public class AccountTest extends TestBase {
         super();
     }
 
+    @DataProvider public Object[][] getLeadTestData() {
+        Object data[][] = TestUtil.getTestData(sheetName);
+        return data;
+    }
+
     @BeforeClass
-    public void Setup()
-    {
+    public void Setup() throws InterruptedException {
         initialization();
         loginpage = new LoginPage();
         homepage = loginpage.login(prop.getProperty("Username"), prop.getProperty("Password"));
@@ -42,10 +47,10 @@ public class AccountTest extends TestBase {
 
         accEditpage = new AccountEditPage();
 
-        accDetailspage = accEditpage.CreateNewResidentialAccount("AutoTestAcc1","No","Standardized","Google Maps","USA:NV:LAS VEGAS:SILENT WATER WAY:7370:89149","36.295095400000000","-115.307233100000000","ROOFTOP","PST","true","702","04","018","004");
+        accDetailspage = accEditpage.CreateNewResidentialAccount("7370 Silent Water Way-89149","No","Standardized","Google Maps","USA:NV:LAS VEGAS:SILENT WATER WAY:7370:89149","36.295095400000000","-115.307233100000000","ROOFTOP","PST","true","702","04","018","004");
         Assert.assertTrue(accDetailspage.ValidateVisibilityofEditButton());
 
-        homepage.PerformGlobalSearch("AutoTestAcc1");
+        homepage.PerformGlobalSearch("7370 Silent Water Way-89149");
         accDetailspage = new AccountDetailsPage();
         Assert.assertTrue(accDetailspage.ValidateAccountDetailLabel());
         accDetailspage.FillAddressInformationResidentialAccount("7370 Silent Water Way","Las Vegas","NV","89149","USA","Clark","(256) 283-3633","Las Vegas","Clark","REAVES", "REAVES KATHRYN RUTH (TE)","SFR (single family residence)","CLEARWATER EST PLAT BOOK 134 PAGE 9 LOT 9 BLOCK 1","TRUST","125-18-410-009","LAS VEGAS");
@@ -53,7 +58,7 @@ public class AccountTest extends TestBase {
 
     }
 
-    @Test(priority = 2, description="Creates a new Account of type 'Branch'",enabled= false)
+    @Test(priority = 1, description="Creates a new Account of type 'Branch'",enabled= false)
     public void VerifyCreateNewBranchAccountTest() throws InterruptedException {
 
         objHomePage = homepage.ClickAnyTabOnHomePage("Accounts");
@@ -64,10 +69,10 @@ public class AccountTest extends TestBase {
 
         accEditpage = new AccountEditPage();
 
-        accDetailspage = accEditpage.CreateNewBranchAccount("Auto1_Las Vegas", "Las Vegas","Branch","1.2263900000","-0.2642600000","0.2700000000","0.0000000000","Standardized","Google Maps","USA:NV:HENDERSON:EASTGATE RD:8385:130:89015","36.034969400000000","-115.011566300000000","PST","TRUE","702");
+        accDetailspage = accEditpage.CreateNewBranchAccount("Las Vegas", "Las Vegas","Branch","1.2263900000","-0.2642600000","0.2700000000","0.0000000000","Standardized","Google Maps","USA:NV:HENDERSON:EASTGATE RD:8385:130:89015","36.034969400000000","-115.011566300000000","PST","TRUE","702");
         Assert.assertTrue(accDetailspage.ValidateVisibilityofEditButton());
 
-        homepage.PerformGlobalSearch("Auto_Las Vegas");
+        homepage.PerformGlobalSearch("Las Vegas");
         accDetailspage = new AccountDetailsPage();
         Assert.assertTrue(accDetailspage.ValidateAccountDetailLabel());
         accDetailspage.FillAddressInformationBranchAccount("8385 Eastgate Rd #130","Henderson","NV","89015","USA","Clark","Northwest","COLFIN 2018-5 INDUSTRIAL OWNER L","SFR (single family residence)","HENDERSON FREEWAY CROSSING PLAT BOOK 151 PAGE 54 PT LOT 1");
@@ -76,7 +81,7 @@ public class AccountTest extends TestBase {
 
     }
 
-    @Test(priority = 1, description="Creates a new Account of type 'Branch'")
+    @Test(priority = 1, description="Creates a new Account of type 'Company'", enabled = false)
     public void VerifyCreateNewCompanyAccountTest() throws InterruptedException {
 
         objHomePage = homepage.ClickAnyTabOnHomePage("Accounts");
@@ -87,10 +92,10 @@ public class AccountTest extends TestBase {
 
         accEditpage = new AccountEditPage();
 
-        accDetailspage = accEditpage.CreateNewCompanyAccount("Auto_Sunrun","Auto_1541941078","024 Rialto St, Oxnard, CA, 93035","00G0d000002eCmr","San Francisco - CA","6/1/2013","sunrundocusign.majstg@gmail.com","SunRun.png","Matrix","Sunrun eSignAdmin","Auto Normal","02d320000004Cm2AAE","Yes","-0.3300000000","1.3000000000","1024 Rialto St","Oxnard","CA","93035","USA","Ventura","(415) 580-6800","Oxnard","Oxnard","Ventura","37.0000","OROZCO LEOCADIO O","OJEDA JOSE O","BLOCK 3 LOT 19, REF: 021MR 045","183-0-183-155","SFR (single family residence)","Standardized","Google Maps","USA:CA:OXNARD:RIALTO ST:1024:93035","34.191069300000000","-119.197742600000000","PST","true","805","26","019","044");
+        accDetailspage = accEditpage.CreateNewCompanyAccount("Sunrun","1541941078","024 Rialto St, Oxnard, CA, 93035","00G0d000002eCmr","San Francisco - CA","6/1/2013","sunrundocusign.majstg@gmail.com","SunRun.png","Matrix","Sunrun eSignAdmin","Auto Normal","02d320000004Cm2AAE","Yes","-0.3300000000","1.3000000000","1024 Rialto St","Oxnard","CA","93035","USA","Ventura","(415) 580-6800","Oxnard","Oxnard","Ventura","37.0000","OROZCO LEOCADIO O","OJEDA JOSE O","BLOCK 3 LOT 19, REF: 021MR 045","183-0-183-155","SFR (single family residence)","Standardized","Google Maps","USA:CA:OXNARD:RIALTO ST:1024:93035","34.191069300000000","-119.197742600000000","PST","true","805","26","019","044");
         Assert.assertTrue(accDetailspage.ValidateVisibilityofEditButton());
 
-        homepage.PerformGlobalSearch("Auto_Sunrun");
+        homepage.PerformGlobalSearch("Sunrun");
         accDetailspage = new AccountDetailsPage();
         Assert.assertTrue(accDetailspage.ValidateAccountDetailLabel());
         accDetailspage.FillAddressInformationCompanyAccount("1024 Rialto St","Oxnard","CA","93035","USA","OROZCO LEOCADIO O","OJEDA JOSE O","SFR (single family residence)","BLOCK 3 LOT 19, REF: 021MR 045","183-0-183-155");
@@ -99,7 +104,7 @@ public class AccountTest extends TestBase {
 
     }
 
-    @Test(priority = 1, description="Creates a new Account of type 'Branch'")
+    @Test(priority = 1, description="Creates a new Account of type 'Partner'", enabled=true)
     public void VerifyCreateNewPartnerAccountTest() throws InterruptedException {
 
         objHomePage = homepage.ClickAnyTabOnHomePage("Accounts");
@@ -110,11 +115,11 @@ public class AccountTest extends TestBase {
 
         accEditpage = new AccountEditPage();
 
-        accDetailspage = accEditpage.CreateNewPartnerAccount("Auto_LGCY Power, LLC","Auto_4358935161","Direct","9/8/2014","Sunrun eSignAdmin","sunrun_esign_admin@sunrunhome.com.installops","Sales","00G60000002hcQb","Active","SR-Branded, Ineligible","salessupport@lgcypower.com.installops","Auto High","00G32000003FWMG","00G32000003FWMp","LGCYPowerLogo_Stretched Blue.png","LGCY Power, LLC","Sunrun","02d320000004Cm2AAE","Matrix","lgcyops@sunrun.com.installops","Headquarters","Sandy - UT","A+","Costco Fenceline","3450 N triumph blvd\n" +
+        accDetailspage = accEditpage.CreateNewPartnerAccount("LGCY Power, LLC","4358935161","Direct","9/8/2014","Sunrun eSignAdmin","sunrun_esign_admin@sunrunhome.com.installops","Sales","00G60000002hcQb","Active","SR-Branded, Ineligible","salessupport@lgcypower.com.installops","Auto High","00G32000003FWMG","00G32000003FWMp","LGCYPowerLogo_Stretched Blue.png","LGCY Power, LLC","Sunrun","02d320000004Cm2AAE","Matrix","lgcyops@sunrun.com.installops","Headquarters","Sandy - UT","A+","Costco Fenceline","3450 N triumph blvd\n" +
                 "Suite 102","Lehi","UT","84043","(844) 542-9797 opt 2","Lgcypower.com","Confirmed","Standardization Missing Address");
         Assert.assertTrue(accDetailspage.ValidateVisibilityofEditButton());
 
-        homepage.PerformGlobalSearch("Auto_LGCY Power, LLC");
+        homepage.PerformGlobalSearch("LGCY Power, LLC");
         accDetailspage = new AccountDetailsPage();
         Assert.assertTrue(accDetailspage.ValidateAccountDetailLabel());
 

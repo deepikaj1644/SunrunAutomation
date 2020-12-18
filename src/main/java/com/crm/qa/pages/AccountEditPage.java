@@ -289,7 +289,12 @@ public class AccountEditPage extends TestBase {
         HasDaylightSavings_Textbox.sendKeys(HasDaylightSavings);
         AreaCode_Textbox.sendKeys(AreaCode);
 
+        TestUtil.SelectRequiredObjectFromLookup("Parent Account","Sunrun");
+        FieldMarketingTeam_Textbox.sendKeys(FieldMarketingTeam);
+
         TestUtil.ClickOn(driver,SaveBtn,20);
+
+
 
         return new AccountDetailsPage();
     }

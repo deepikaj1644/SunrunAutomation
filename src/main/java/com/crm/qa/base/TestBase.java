@@ -30,7 +30,10 @@ public class TestBase {
         try {
             prop = new Properties();
             FileInputStream ip = new FileInputStream("D:\\Deepika\\Automation Workspace\\Workspace\\SunRunCRMTest1\\SunrunProject\\src\\main\\java\\com\\crm\\qa\\config\\config.properties");
-            prop.load(ip);
+
+
+                prop.load(ip);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class SelectObjectRecordTypePage extends TestBase {
 
-    @FindBy(xpath="//label[text()='Record Type of new record']//following::select")
+    @FindBy(xpath="//label[contains(text(),'Record Type of new record')]//following::select")
     WebElement SelectRecordTypeList;
 
     @FindBy(xpath="//input[@type='submit' and @value='Continue']")

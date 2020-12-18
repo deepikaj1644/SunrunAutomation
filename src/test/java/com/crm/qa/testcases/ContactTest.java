@@ -22,8 +22,7 @@ public class ContactTest extends TestBase {
     }
 
     @BeforeClass
-    public void Setup()
-    {
+    public void Setup() throws InterruptedException {
         initialization();
         loginpage = new LoginPage();
         homepage = loginpage.login(prop.getProperty("Username"), prop.getProperty("Password"));
@@ -39,7 +38,7 @@ public class ContactTest extends TestBase {
 
         contacteditpage = new ContactEditPage();
 
-        contactdetailspage = contacteditpage.EditContactDetails("AutoFN","AutoLN","AutoTestAcc1","(256) 283-3633","(256) 283-3633","Yes","deepika16@yopmail.com","LGCY","Phone","8797360538262544207","484749319042","484749319042,0065C000005T3NXQA0,,Pay by Check","7370 Silent Water Way","Las Vegas","NV","89149","USA","NA","Standardization Required","8/5/2019 12:24 PM","8/5/2019 12:24 PM");
+        contactdetailspage = contacteditpage.EditContactDetails("Kathy","Reaves","7370 Silent Water Way-89149","(256) 283-3633","(256) 283-3633","Yes","Kathy.Reaves@yopmail.com","LGCY","Phone","8797360538262544207","484749319042","484749319042,0065C000005T3NXQA0,,Pay by Check","7370 Silent Water Way","Las Vegas","NV","89149","USA","NA","Standardization Required","8/5/2019 12:24 PM","8/5/2019 12:24 PM");
         Assert.assertTrue(contactdetailspage.ValidateVisibilityofEditButton());
         Assert.assertTrue(contactdetailspage.ValidateAccountDetailLabel());
 
